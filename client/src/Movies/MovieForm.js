@@ -29,9 +29,10 @@ const MovieForm = props => {
     let name = ev.target.name;
 
     if (name === 'stars') {
+      let arr = value.split(',');
       setItem({
         ...item,
-        [name]: [value]
+        [name]: arr
       });
     } else {
       setItem({
