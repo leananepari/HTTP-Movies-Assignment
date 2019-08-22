@@ -6,7 +6,7 @@ import MovieList from "./Movies/MovieList";
 import Movie from "./Movies/Movie";
 import MovieForm from "./Movies/MovieForm";
 
-const App = (props) => {
+const App = () => {
   const [movies, setMovies] = useState([]);
   const [savedList, setSavedList] = useState([]);
   const [update, setUpdate] = useState(false);
@@ -17,7 +17,6 @@ const App = (props) => {
 
   const addToSavedList = movie => {
     setSavedList([...savedList, movie]);
-    console.log(savedList)
   };
 
   const fetchData = () => {

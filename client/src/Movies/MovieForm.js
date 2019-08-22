@@ -21,7 +21,7 @@ const MovieForm = props => {
       })
       .catch(err => console.log(err.response));
     }
-  }, []);
+  }, [props.match.params.id]);
 
   const changeHandler = ev => {
     ev.persist();
@@ -47,7 +47,6 @@ const MovieForm = props => {
       axios
         .put(`http://localhost:5000/api/movies/${item.id}`, item)
         .then(res => {
-          console.log(res.data);
           props.setUpdate(!props.update);
           setItem(initialItem);
           props.history.push('/');
@@ -57,7 +56,6 @@ const MovieForm = props => {
       axios
       .post(`http://localhost:5000/api/movies/`, item)
       .then(res => {
-        console.log(res.data);
         props.setUpdate(!props.update);
         setItem(initialItem);
         props.history.push('/');
