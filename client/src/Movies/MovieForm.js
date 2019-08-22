@@ -5,7 +5,7 @@ const initialItem = {
   title: '',
   director: '',
   metascore: '',
-  stars: ''
+  stars: []
 };
 
 const MovieForm = props => {
@@ -26,17 +26,36 @@ const MovieForm = props => {
   const changeHandler = ev => {
     ev.persist();
     let value = ev.target.value;
+    let name = ev.target.name;
 
-    setItem({
-      ...item,
-      [ev.target.name]: value
-    });
+    if (name === 'stars') {
+      setItem({
+        ...item,
+        [name]: [value]
+      });
+    } else {
+      setItem({
+        ...item,
+        [name]: value
+      });
+    }
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    axios
-      .put(`http://localhost:5000/api/movies/${item.id}`, item)
+    if (props.match.params.id) {
+      axios
+        .put(`http://localhost:5000/api/movies/${item.id}`, item)
+        .then(res => {
+          console.log(res.data);
+          props.setUpdate(!props.update);
+          setItem(initialItem);
+          props.history.push('/');
+        })
+        .catch(err => console.log(err.response));
+    } else {
+      axios
+      .post(`http://localhost:5000/api/movies/`, item)
       .then(res => {
         console.log(res.data);
         props.setUpdate(!props.update);
@@ -44,6 +63,7 @@ const MovieForm = props => {
         props.history.push('/');
       })
       .catch(err => console.log(err.response));
+    }
   };
 
   return (

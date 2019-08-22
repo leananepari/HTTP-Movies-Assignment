@@ -6,7 +6,7 @@ import MovieList from "./Movies/MovieList";
 import Movie from "./Movies/Movie";
 import MovieForm from "./Movies/MovieForm";
 
-const App = () => {
+const App = (props) => {
   const [movies, setMovies] = useState([]);
   const [savedList, setSavedList] = useState([]);
   const [update, setUpdate] = useState(false);
@@ -43,6 +43,12 @@ const App = () => {
       />
       <Route 
          path="/update-movie/:id" 
+         render={props => {
+           return <MovieForm {...props} setUpdate={setUpdate} update={update} /> 
+         }}
+      />
+      <Route 
+         path="/add-movie"
          render={props => {
            return <MovieForm {...props} setUpdate={setUpdate} update={update} /> 
          }}

@@ -11,12 +11,21 @@ export default class MovieList extends Component {
     };
   }
 
+  addMovie = () => {
+    this.props.history.push('/add-movie');
+  }
+
   render() {
     return (
-      <div className="movie-list">
-        {this.props.movies.map(movie => (
-          <MovieDetails key={movie.id} movie={movie} />
-        ))}
+      <div>
+        <button onClick={this.addMovie} style={{width: '90px', height: '30px', display: 'block', margin: '0 auto'}}>
+                 ADD MOVIE
+        </button>
+        <div className="movie-list">
+          {this.props.movies.map(movie => (
+            <MovieDetails key={movie.id} movie={movie} />
+          ))}
+        </div>
       </div>
     );
   }
